@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jQuery.js"></script>
+</head>
+<body>
+<center><h2>Izposojevalnica Avtek </h2><center>
+
+<label for="start">Od:</label>
+
+<input type="date" id="start" name="trip-start"
+       value="2020-11-24"
+       min="2020-01-01" max="2021-12-31">
+	   
+<label for="start"> Do:</label>
+
+<input type="date" id="start" name="trip-start"
+       value="2020-11-25"
+       min="2020-01-01" max="2021-12-31">
+<br>
+<br>
+
+ <form> Izberite avto:
+  <select id="ddl1" name = "ddl1" onchange="configureDDL2(this, document.getElementById('ddl2'), document.getElementById('ddl3'))" required>
+    <option value="">Izberite velikost</option>
+    <option value="Majhen">Majhen</option>
+    <option value="Srednji">Srednji</option>
+    <option value="Veliki">Veliki</option>
+  </select>
+  <select id="ddl2" name = "ddl2" onchange="configureDDL3(document.getElementById('ddl1'), this, document.getElementById('ddl3'))" required>
+  </select>
+  <select id="ddl3" name = "ddl3" required>
+  </select>
+  <br>
+<br> Izberite vrsto menjalnika: 
+  <input type="radio" id="rocni" name="menjalnik" value="rocni" checked/>
+  <label for="rocni">Roèni menjalnik</label>
+  <input type="radio" id="avtomatik" name="menjalnik" value="avtomatik"/>
+  <label for="avtomatik">Avtomatski menjalnik</label><br>
+ <br>
+ Izberite vrsto motorja: 
+  <input type="radio" id="bencin" name="motor" value="bencin" checked />
+  <label for="rocni">Bencinski</label>
+  <input type="radio" id="dizel" name="motor" value="dizel" />
+  <label for="avtomatik">Dizelski</label><br>
+   <br>
+ <input type="button" value="Potrdi" onClick="myFunction()" />
+ </form>
+ <br>
+ <p id="demo"></p>
+ <br>
+ <input type="button" value="Pojdi na plaèilo" id="skriti" hidden="true"/>
+<script>
+var myNestedVals = {
+        'Majhen': {
+            'Volkswagen': ['Golf', 'Polo', 'Lupo'],
+            'Renault': ['Clio', 'Twingo', 'Zoe'],
+            'Fiat': ['Punto', 'Abarth', '500C']
+        },
+        'Srednji': {
+            'Volkswagen': ['Passat', 'Arteon', 'Jetta'],
+            'Renault': ['Megane', 'Talisman', 'Fluence'],
+            'Fiat': ['Tipo', 'Argo', 'Ottimo']
+        },
+        'Veliki': {
+            'Volkswagen': ['Tiguan', 'Atlas', 'Taos'],
+            'Renault': ['Kaptur', 'Kadjar', '3.2.3'],
+            'Fiat': ['Panda', '500X Cross', 'Toro']
+        }
+    }
+ function createOption(ddl, text, value) {
+        var opt = document.createElement('option');
+        opt.value = value;
+        opt.text = text;
+        ddl.options.add(opt);
+    }
+
+    function createOptions(optionsArray, ddl) {
+        for (i = 0; i < optionsArray.length; i++) {
+            createOption(ddl, optionsArray[i], optionsArray[i]);
+        }
+    }
+
+    function configureDDL2(ddl1, ddl2, ddl3) {
+        ddl2.options.length = 0;
+        ddl3.options.length = 0;
+        createOption(ddl2, "Izberite znamko", "");
+        var ddl2keys = Object.keys(myNestedVals[ddl1.value]);
+        createOptions(ddl2keys, ddl2)
+    }
+
+    function configureDDL3(ddl1, ddl2, ddl3) {
+        ddl3.options.length = 0;
+        createOption(ddl3, "Izberite model", "");
+        var ddl3keys = myNestedVals[ddl1.value][ddl2.value];
+        createOptions(ddl3keys, ddl3);
+    }
+	
+
+function myFunction() {
+	let ddl1 = document.getElementById("ddl1");
+	let ddl2 = document.getElementById("ddl2");
+	let ddl3 = document.getElementById("ddl3");
+	let rocni = document.getElementById("rocni");
+	let avtomatik = document.getElementById("avtomatik");
+	let bencin = document.getElementById("bencin");
+	let dizel = document.getElementById("dizel");
+	
+	let form = document.querySelector('form');
+	if (form.reportValidity()) {
+		var values = {};
+		$.each($("form").serializeArray(), function (i, field) {
+		values[field.name] = field.value;
+		});
+		
+		console.log(values["ddl1"]);
+		$('#skriti').attr('hidden', false);
+	}
+	
+    
+}
+</script>
+</body>
+</html>

@@ -2,54 +2,120 @@
 <html>
 <head>
 <script src="jQuery.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./bootstrap.min.css">
 </head>
 <body>
-<center><h2>Izposojevalnica Avtek </h2><center>
+<nav>
+  <div class="container">
+    <ul class="navbar-left">
+      <li><a href="index.html">Izposojevalnica Avtek</a></li>
+    </ul>
 
-<label for="start">Od:</label>
+    <ul class="navbar-right">
+      <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id = "cart-item-num1">0</span></a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="shopping-cart">
+    <div class="shopping-cart-header">
+      <i class="fa fa-shopping-cart cart-icon"></i><span class="badge" id = "cart-item-num2" >0</span>
+      <div class="shopping-cart-total">
+        <span class="lighter-text">Vse skupaj:</span>
+        <span class="main-color-text" id="cart-cost">0€</span>
+      </div>
+    </div>
+    <ul class="shopping-cart-items">
+    </ul>
 
-<input type="date" id="start" name="trip-start"
+    <button id="checkout" onClick="window.location = 'placilo.html'" class="btn-primary button" style="text-decoration:none; margin:auto;" disabled>Nadaljujte na plaèilo</button>
+  </div>
+
+<div class = "row">
+<div class = "col-8" style="margin:auto;">
+<div class = "card" style="margin-top: 50px;">
+<div class = "card-body">
+	<div class = "card-title" >Izposodite si avto</div>
+	
+	
+	   
+	 <form>
+	 <div class="form-group row">
+	<label for="start" class= "col-sm-1 control-label" style="padding-top:8px;">Od:</label>
+	<input type="date" id="start" name="trip-start" class = "form-control col-sm-5"
        value="2020-11-24"
        min="2020-01-01" max="2021-12-31">
 	   
-<label for="start"> Do:</label>
-
-<input type="date" id="start" name="trip-start"
+	<label for="end" class= "col-sm-1 control-label" style="padding-top: 8px;"> Do:</label>
+	<input type="date" id="end" name="trip-end" class="form-control col-sm-5"
        value="2020-11-25"
        min="2020-01-01" max="2021-12-31">
-<br>
-<br>
-
- <form> Izberite avto:
-  <select id="ddl1" name = "ddl1" onchange="configureDDL2(this, document.getElementById('ddl2'), document.getElementById('ddl3'))" required>
-    <option value="">Izberite velikost</option>
-    <option value="Majhen">Majhen</option>
-    <option value="Srednji">Srednji</option>
-    <option value="Veliki">Veliki</option>
-  </select>
-  <select id="ddl2" name = "ddl2" onchange="configureDDL3(document.getElementById('ddl1'), this, document.getElementById('ddl3'))" required>
-  </select>
-  <select id="ddl3" name = "ddl3" required>
-  </select>
-  <br>
-<br> Izberite vrsto menjalnika: 
-  <input type="radio" id="rocni" name="menjalnik" value="rocni" checked/>
-  <label for="rocni">Roèni menjalnik</label>
-  <input type="radio" id="avtomatik" name="menjalnik" value="avtomatik"/>
-  <label for="avtomatik">Avtomatski menjalnik</label><br>
- <br>
- Izberite vrsto motorja: 
-  <input type="radio" id="bencin" name="motor" value="bencin" checked />
-  <label for="rocni">Bencinski</label>
-  <input type="radio" id="dizel" name="motor" value="dizel" />
-  <label for="avtomatik">Dizelski</label><br>
-   <br>
- <input type="button" value="Potrdi" onClick="myFunction()" />
- </form>
+	   </div>
+	   <div class="form-group">
+	<label for="ddl1"> Izberite avto:</label>
+	  <select id="ddl1" name = "ddl1" onchange="configureDDL2(this, document.getElementById('ddl2'), document.getElementById('ddl3'))" class="form-control" required >
+		<option value="">Izberite velikost</option>
+		<option value="Majhen">Majhen</option>
+		<option value="Srednji">Srednji</option>
+		<option value="Veliki">Veliki</option>
+	  </select>
+	  </div>
+	  <div class="form-group">
+	  <select id="ddl2" name = "ddl2" onchange="configureDDL3(document.getElementById('ddl1'), this, document.getElementById('ddl3'))" class="form-control" required>
+	  </select>
+	  </div>
+	  <div class="form-group">
+	  <select id="ddl3" name = "ddl3" class="form-control" required>
+	  </select>
+	  </div>
+	 <div class = "form-group">
+	 Izberite vrsto menjalnika: 
+	 <div class="form-check form-check-inline">
+	  <input type="radio" id="rocni" name="menjalnik" value="rocni" class= "form-check-input" checked/>
+	  <label for="rocni" class = "form-check-label">Roèni menjalnik</label>
+	  </div>
+	  <div class="form-check form-check-inline">
+	  <input type="radio" id="avtomatik" name="menjalnik" value="avtomatik" class= "form-check-input"/>
+	  <label for="avtomatik" class = "form-check-label">Avtomatski menjalnik</label><br>
+	  </div>
+	</div>
+	
+	<div class = "form-group">
+	 Izberite vrsto motorja: 
+	 <div class="form-check form-check-inline">
+	  <input type="radio" id="bencin" name="motor" value="bencin" class= "form-check-input" checked  />
+	  <label for="bencin" class = "form-check-label">Bencinski</label>
+	  </div>
+	  <div class="form-check form-check-inline">
+	  <input type="radio" id="dizel" name="motor" value="dizel"class= "form-check-input" />
+	  <label for="dizel" class = "form-check-label">Dizelski</label><br>
+	  </div>
+	  </div>
+	  
+	  <div class = "form-group">
+	  Želite skleniti dodatno avtomobilsko zavarovanje?: 
+	  <div class="form-check form-check-inline">
+	  <input type="radio" id="da" name="zavarovanje" value="Da" class= "form-check-input"/>
+	  <label for="da" class = "form-check-label">Da</label>
+	  </div>
+	  <div class="form-check form-check-inline">
+	  <input type="radio" id="ne" name="zavarovanje" value="Ne" class= "form-check-input" checked/>
+	  <label for="ne" class = "form-check-label">Ne</label><br>
+	  </div>
+	  </div>
+	 <center><input type="button" class="btn btn-primary" value="Potrdi" onClick="myFunction()" /></center>
+	 </form>
+	 </div>
+ </div>
+ </div>
+ </div>
  <br>
  <p id="demo"></p>
  <br>
  <input type="button" value="Pojdi na plaèilo" id="skriti" hidden="true"/>
+</div>
 <script>
 var myNestedVals = {
         'Majhen': {
@@ -64,7 +130,7 @@ var myNestedVals = {
         },
         'Veliki': {
             'Volkswagen': ['Tiguan', 'Atlas', 'Taos'],
-            'Renault': ['Kaptur', 'Kadjar', '3.2.3'],
+            'Renault': ['Kaptur', 'Kadjar', 'Duster'],
             'Fiat': ['Panda', '500X Cross', 'Toro']
         }
     }
@@ -113,12 +179,57 @@ function myFunction() {
 		values[field.name] = field.value;
 		});
 		
-		console.log(values["ddl1"]);
-		$('#skriti').attr('hidden', false);
+		var date1 = new Date(document.getElementById("start").value);
+        var date2 = new Date(document.getElementById("end").value);
+        var razlika =  parseInt((date2 - date1) / (24 * 3600 * 1000));
+		
+		var output = "";
+		
+		var cena = 0;
+		
+		if (values["ddl1"] == "Majhen"){
+			var cena1 = "20";
+		}
+		else if (values["ddl1"] == "Srednji"){
+			var cena1 = "30";
+		}
+		else {
+			var cena1 = "40";
+		}
+		
+		if (values["zavarovanje"] == "Da"){
+			cena = cena + 2*razlika;
+			var z = " Izbrali ste tudi zavarovanje. Cena znaša 2€ na dan."
+		}
+		else {var z = " Zavarovanja niste izbrali."}
+		
+		cena = cena + parseInt(cena1)*razlika;
+		console.log(cena);
+		var k = cena.toString();
+		
+		 //output = output.concat("Izbrali ste avto ", values["ddl2"], " ", values["ddl3"], ", cena za izbrani avto je ", cena1, " € na dan.", z, " Vaša konèna cena znaša ", k, " €.");
+		
+		let quantity = parseInt($('#cart-item-num1').text());
+		console.log(quantity);
+		$('#cart-item-num1').text(quantity+1);
+		$('#cart-item-num2').text(quantity+1);
+		$('.shopping-cart-items').append('<li class="clearfix"><span class="item-name">'+ values["ddl2"] + ' '+ values["ddl3"]+'</span><span class="item-price">'+cena1+'€</span><span class="item-quantity">Zavarovanje:'+values["zavarovanje"]+'</span></li>')
+		$('#cart-cost').text(k + '€');
+		 //$('#skriti').attr('hidden', false);
+		$('#checkout').prop('disabled', false);
+		
+		
+		
+		console.log(date1);
+		console.log(date2);
+		console.log(razlika);
 	}
 	
     
 }
 </script>
 </body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="./script.js"></script>
+<script src="./bootstrap.min.js"></script>
 </html>
